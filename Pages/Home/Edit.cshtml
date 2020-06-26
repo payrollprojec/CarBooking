@@ -1,0 +1,47 @@
+﻿@page
+@model CarBooking.Pages.Home.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CarBookingz</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CarBookingz.Id" />
+            <div class="form-group">
+                <label asp-for="CarBookingz.StartDate" class="control-label"></label>
+                <input asp-for="CarBookingz.StartDate" class="form-control" />
+                <span asp-validation-for="CarBookingz.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarBookingz.EndDate" class="control-label"></label>
+                <input asp-for="CarBookingz.EndDate" class="form-control" />
+                <span asp-validation-for="CarBookingz.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <select class="form-control-sm mr-sm-3" asp-for="CarBookingz.CarId" asp-items="Model.Cars">
+                </select>
+            </div>
+            <input type="hidden" asp-for="CarBookingz.ApplicationUserId" />
+            <input type="hidden" asp-for="CarBookingz.StatusId" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

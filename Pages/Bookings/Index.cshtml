@@ -1,0 +1,78 @@
+﻿@page
+@model CarBooking.Pages.Bookings.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Manage Bookings</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                User
+            </th>
+            <th>
+                Car
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBookingz[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBookingz[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBookingz[0].TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBookingz[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBookingz[0].Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CarBookingz)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.Manufacturer) - @Html.DisplayFor(modelItem => item.Car.CarModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Name)
+            </td>
+            <td>
+                <form method="post">
+                    <input type="hidden" asp-for="SelectedId" value="@item.Id" />
+                    <input type="hidden" asp-for="SelectedAction" value="Approved" />
+                    <button class="btn btn-success text-white">Approve</button>
+                </form>
+                <br />
+                <form method="post">
+                    <input type="hidden" asp-for="SelectedId" value="@item.Id" />
+                    <input type="hidden" asp-for="SelectedAction" value="Rejected" />
+                    <button class="btn btn-danger text-white">Reject</button>
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

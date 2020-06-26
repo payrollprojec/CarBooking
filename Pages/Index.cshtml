@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+
+@if (User.IsInRole("admin"))
+{
+    <div class="text-center">
+        <a class="btn btn-primary" asp-page="/Cars/Index">Manage Cars</a>
+        <a class="btn btn-secondary" asp-page="/Bookings/Index">Manage Bookings</a>
+    </div>
+
+}
+else
+{
+    <div class="text-center">
+        <h2 class="display-4">Cheap car rentals in Kuala Lumpur</h2>
+        <a class="display-4 btn btn-warning btn-lg" href="./Home/Index">Start Booking Now</a>
+
+    </div>
+}
+<br />
+<div class="row">
+
+    @foreach (var item in Model.Car)
+    {
+        <div class="card col-sm-4">
+            <img class="card-img-top" src="@item.ImgUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@item.Manufacturer - @item.CarModel</h5>
+                <p class="card-text">RM @item.DailyRate/day</p>
+                <p class="card-text">@Html.DisplayNameFor(model => item.NoOfSeats): @item.NoOfSeats</p>
+            </div>
+        </div>
+    }
+</div>
+
